@@ -1,6 +1,6 @@
 aiogram==3.17.0
 supabase==2.14.0
-groq==0.13.0
 python-dotenv==1.0.1
 tenacity==9.0.0
 cachetools==5.5.0
+aiohttp>=3.9.0

@@ -139,17 +139,17 @@ async def cmd_health(message: Message):
     if message.from_user.id not in ADMIN_IDS:
         await message.answer("❌ У вас нет прав для этой команды.")
         return
-    
+
     try:
-        from ai import check_groq_health
-        groq_status = await check_groq_health()
+        from ai import check_siliconflow_health
+        api_status = await check_siliconflow_health()
         
-        status = "✅ Бот работает нормально" if groq_status else "⚠️ Groq API недоступен"
+        status = "✅ Бот работает нормально" if api_status else "⚠️ SiliconFlow API недоступен"
         
         await message.answer(
             f"🏥 <b>Health Check</b>\n\n"
             f"• Статус: {status}\n"
-            f"• Groq API: {'✅ OK' if groq_status else '❌ ERROR'}\n"
+            f"• SiliconFlow API: {'✅ OK' if api_status else '❌ ERROR'}\n"
             f"• База данных: ✅ OK\n"
             f"• Telegram API: ✅ OK",
             parse_mode="HTML"
