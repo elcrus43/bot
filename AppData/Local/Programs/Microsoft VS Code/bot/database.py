@@ -15,14 +15,16 @@ def get_supabase_client() -> Client:
     """
     Lazy initialization of Supabase client with caching.
     Creates client only when needed.
+    Uses Service Role Key for full access.
     """
     url = os.getenv("SUPABASE_URL")
-    key = os.getenv("SUPABASE_KEY")
+    # Используем Service Role Key для полного доступа
+    key = os.getenv("SUPABASE_SERVICE_KEY") or os.getenv("SUPABASE_KEY")
 
     if not url or not key:
-        raise EnvironmentError("SUPABASE_URL и SUPABASE_KEY должны быть заданы в .env файле!")
+        raise EnvironmentError("SUPABASE_URL и SUPABASE_KEY/SUPABASE_SERVICE_KEY должны быть заданы в .env файле!")
 
-    logger.info("Supabase client initialized")
+    logger.info(f"Supabase client initialized: {url}")
     return create_client(url, key)
 
 
